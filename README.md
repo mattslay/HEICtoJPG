@@ -1,7 +1,9 @@
 # HEICtoJPG
-Simple converter for HEIC files
+
+Converter for HEIC files
 
 # How to use it
 
-Drag n drop you folder containing you heic files to convert
+Drag n drop you folder containing you heic files to convert them
 The tool will create a subfolder named "jpg" and will convert your files
+For convinience the tool will also convert png files and copy jpg files from the input folder to the converted folder
