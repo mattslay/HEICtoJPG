@@ -1,2 +1,2 @@
 # HEICtoJPG
-Simple converter fro HEIC files
+Simple converter for HEIC files
