@@ -21,8 +21,7 @@ namespace HEICtoJPG
 					fileLeft = filesInFolder.Length;
 					foreach (var file in filesInFolder)
 					{
-						if (Path.GetExtension(file).ToLower().Contains("heic"))
-							ConvertImage(file, exportPath);
+						ConvertImage(file, exportPath);
 						Console.WriteLine(--fileLeft + " files left");
 					}
 				}
@@ -31,15 +30,28 @@ namespace HEICtoJPG
 			Console.ReadKey();
 		}
 
-		static void ConvertImage(string heicImagePath, string exportPath)
+		static void ConvertImage(string fileToConvert, string exportPath)
 		{
-			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(heicImagePath))) + ".jpg";
-			Console.Write("Converting " + exportFilePath + "...");
-			using (MagickImage image = new MagickImage(heicImagePath))
+			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(fileToConvert))) + ".jpg";
+			if (File.Exists(exportFilePath))
 			{
-				image.Write(exportFilePath);
-				Console.WriteLine("Ok");
+				Console.WriteLine("File already exist " + exportFilePath);
+				return;
 			}
+			string imageExtension = Path.GetExtension(fileToConvert).ToLower();
+			if (imageExtension.Contains("heic") || imageExtension.Contains("png"))
+			{
+				if (File.Exists(exportFilePath))
+					Console.WriteLine("File already exist " + exportFilePath);
+				Console.Write("Converting " + fileToConvert + "...");
+				using (MagickImage image = new MagickImage(fileToConvert))
+				{
+					image.Write(exportFilePath);
+					Console.WriteLine("Ok");
+				}
+			}
+			else if (imageExtension.Contains("jpg"))
+				File.Copy(fileToConvert, exportFilePath);
 		}
 	}
 }
