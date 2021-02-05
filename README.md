@@ -1,12 +1,30 @@
 # HEICtoJPG
 
-Converter for HEIC files
+Converter for HEIC files to jpg or png
 
-# How to use it
+ToDo: Update app to this command line format and features:
 
-Drag n drop you folder containing you heic files to convert them
+    HeicConvert.exe /source = "{source diretory}"  /target = "{target directory}"  /{jpg|png} {/delete}
 
 
-The tool will create a subfolder named "jpg" and will convert your files
+Example:
 
-Note: For convinience the tool will also convert png files and copy jpg files from the input folder to the converted folder
+    HeicConvert.exe "C:\MyPath" "D:\SomeOtherFolder\SubFolder\" /jpg
+
+    HeicConvert.exe "C:\MyPath" "D:\SomeOtherFolder\SubFolder\" /png
+
+
+And, you ccan use the command line switch to *delete* the original HEIC once conversion is done and verified:
+
+    HeicConvert.exe "C:\MyPath" "D:\SomeOtherFolder\SubFolder\" /jpg /delete
+
+
+If you don't want to specify the source and target dir, you can just use this:
+
+    HeicConvert.exe /jpg
+    
+    HeicConvert.exe /jpg /delete
+
+
+
+
