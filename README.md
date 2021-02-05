@@ -3,7 +3,8 @@
 Converter for HEIC files to jpg or png
 
 
-ToDo: Update app to this command line format and features:
+# ToDo:
+## Update app to this command line format and features:
 
     HeicConvert.exe /source = "{source directory}"  /target = "{target directory}"  /{jpg|png} {/delete}
 
