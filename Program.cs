@@ -14,7 +14,6 @@ namespace HEICtoJPG
 		//public static string imageType;
 		static void Main(string[] args)
 		{
-
 			int fileLeft = 0;
 			string sourcePath = "", targetPath = "";
 			string[] filesInFolder;
@@ -22,13 +21,11 @@ namespace HEICtoJPG
 			string sourceType = ".heic";
 			string outputType = ".jpg";
 
-
 			sourcePath = Directory.GetCurrentDirectory();
-
 			targetPath = sourcePath;
 
 			for (int x = 0; x < args.Length; x++)
-            {
+			{
 				if (args[x].ToLower().Contains("/source"))
 					sourcePath = GetPath(args[x]);
 				if (args[x].ToLower().Contains("/target"))
@@ -43,17 +40,12 @@ namespace HEICtoJPG
 
 			foreach (var file in filesInFolder)
 			{
-				string ext = Path.GetExtension(file).ToLower();
-				if (ext == ".heic")
-				{
-					Console.WriteLine(file);
-					ConvertImage(file, targetPath, outputType, deleteFlag);
-
-				}
+				Console.WriteLine(file);
+				ConvertImage(file, targetPath, outputType, deleteFlag);
 			}
-
-
 		}
+
+		
 		static void ConvertImage(string fileToConvert, string exportPath, string convertTo, bool deleteOriginalFile = false)
 		{
 			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(fileToConvert))) + convertTo;
