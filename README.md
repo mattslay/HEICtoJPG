@@ -10,9 +10,9 @@ Converter for HEIC files to jpg or png
 
 Example:
 
-    HeicConvert.exe /source="C:\MyPath" /target = "D:\SomeOtherFolder\SubFolder" /jpg
+    HeicConvert.exe /source="C:\MyPath" /target="D:\SomeOtherFolder\SubFolder" /jpg
 
-    HeicConvert.exe /source="C:\MyPath" /target = "D:\SomeOtherFolder\SubFolder" /png
+    HeicConvert.exe /source="C:\MyPath" /target="D:\SomeOtherFolder\SubFolder" /png
 
 
 And, you can use the command line switch to *delete* the original HEIC once conversion is done and verified:
