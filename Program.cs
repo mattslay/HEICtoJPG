@@ -63,6 +63,7 @@ namespace HEICtoJPG
 			if (File.Exists(exportFilePath))
 			{
 				Console.WriteLine("Skipped file  " + inFilename + " because it has already been converted.");
+				return;
 			}
 
 			if (File.Exists(fileToConvert))
