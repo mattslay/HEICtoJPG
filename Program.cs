@@ -1,57 +1,91 @@
-﻿using ImageMagick;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ImageMagick;
 using System.IO;
+using System.Threading;
 
 namespace HEICtoJPG
 {
 	class Program
 	{
+		//public static string imageType;
 		static void Main(string[] args)
 		{
-			int fileLeft;
-			foreach (var arg in args)
+
+			int fileLeft = 0;
+			string sourcePath = "", targetPath = "";
+			string[] filesInFolder;
+			bool deleteFlag = false;
+			string sourceType = ".heic";
+			string outputType = ".jpg";
+
+			sourcePath = Directory.GetCurrentDirectory();
+			targetPath = sourcePath;
+
+			for (int x = 0; x < args.Length; x++)
+            {
+				if (args[x].ToLower().Contains("/source"))
+					sourcePath = GetPath(args[x]);
+				if (args[x].ToLower().Contains("/target"))
+					targetPath = GetPath(args[x]);
+				if (args[x].ToLower() == "/delete")
+					deleteFlag = true;
+				if (args[x].ToLower() == "/png")
+					outputType = ".png";
+			}
+
+			filesInFolder = Directory.GetFiles(sourcePath, "*." + sourceType);
+
+			foreach (var file in filesInFolder)
 			{
-				Console.WriteLine("Checking directory: " + arg);
-				if (Directory.Exists(arg))
+				string ext = Path.GetExtension(file).ToLower();
+				if (ext == ".heic")
 				{
-					string exportPath = Path.Combine(arg, "jpg");
-					if (!Directory.Exists(exportPath))
-						Directory.CreateDirectory(exportPath);
-					var filesInFolder = Directory.GetFiles(arg);
-					fileLeft = filesInFolder.Length;
-					foreach (var file in filesInFolder)
-					{
-						ConvertImage(file, exportPath);
-						Console.WriteLine(--fileLeft + " files left");
-					}
+					Console.WriteLine(file);
+					ConvertImage(file, targetPath, outputType, deleteFlag);
+
 				}
 			}
-			Console.WriteLine("Press AnyKey to continue");
-			Console.ReadKey();
-		}
 
-		static void ConvertImage(string fileToConvert, string exportPath)
+
+		}
+		static void ConvertImage(string fileToConvert, string exportPath, string convertTo, bool deleteOriginalFile = false)
 		{
-			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(fileToConvert))) + ".jpg";
+			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(fileToConvert))) + convertTo;
+			string outFilename = Path.GetFileName(exportFilePath);
+			string ext = Path.GetExtension(outFilename);
+			string imageExtension = Path.GetExtension(fileToConvert).ToLower();
+			string inFilename = Path.GetFileName(fileToConvert);
+
 			if (File.Exists(exportFilePath))
 			{
-				Console.WriteLine("File already exist " + exportFilePath);
-				return;
+				Console.WriteLine("Skipped file  " + inFilename + " because it has already been converted.");
 			}
-			string imageExtension = Path.GetExtension(fileToConvert).ToLower();
-			if (imageExtension.Contains("heic") || imageExtension.Contains("png"))
+
+			if (File.Exists(fileToConvert))
 			{
-				if (File.Exists(exportFilePath))
-					Console.WriteLine("File already exist " + exportFilePath);
-				Console.Write("Converting " + fileToConvert + "...");
-				using (MagickImage image = new MagickImage(fileToConvert))
+				Console.Write("Processing Item " + inFilename + "...");
+
+				using (MagickImage image = new MagickImage(File.ReadAllBytes(fileToConvert)))
 				{
 					image.Write(exportFilePath);
 					Console.WriteLine("Ok");
 				}
+
+				if (deleteOriginalFile && File.Exists(exportFilePath))
+					File.Delete(fileToConvert);
 			}
-			else if (imageExtension.Contains("jpg"))
-				File.Copy(fileToConvert, exportFilePath);
+
+		}
+		static string GetPath(string str)
+		{
+
+			string[] ptr = str.Split(new char[] { '=' });
+			return ptr[1];
+
 		}
 	}
 }
