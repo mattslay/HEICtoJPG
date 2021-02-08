@@ -22,7 +22,9 @@ namespace HEICtoJPG
 			string sourceType = ".heic";
 			string outputType = ".jpg";
 
+
 			sourcePath = Directory.GetCurrentDirectory();
+
 			targetPath = sourcePath;
 
 			for (int x = 0; x < args.Length; x++)
@@ -77,7 +79,10 @@ namespace HEICtoJPG
 				}
 
 				if (deleteOriginalFile && File.Exists(exportFilePath))
+				{
 					File.Delete(fileToConvert);
+					Console.WriteLine("  ... deleted source file.");
+				}
 			}
 
 		}
