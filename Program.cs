@@ -37,7 +37,7 @@ namespace HEICtoJPG
 					outputType = ".png";
 			}
 
-			filesInFolder = Directory.GetFiles(sourcePath, "*." + sourceType);
+			filesInFolder = Directory.GetFiles(sourcePath, "*" + sourceType);
 
 			foreach (var file in filesInFolder)
 			{
