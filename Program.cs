@@ -11,7 +11,6 @@ namespace HEICtoJPG
 {
 	class Program
 	{
-		//public static string imageType;
 		static void Main(string[] args)
 		{
 			string sourcePath = "";
@@ -45,7 +44,7 @@ namespace HEICtoJPG
 			}
 		}
 
-		
+
 		static void ConvertImage(string fileToConvert, string exportPath, string convertTo, bool deleteOriginalFile = false)
 		{
 			string exportFilePath = Path.Combine(exportPath, Path.GetFileNameWithoutExtension(Path.GetFileName(fileToConvert))) + convertTo;
@@ -66,8 +65,9 @@ namespace HEICtoJPG
 
 				using (MagickImage image = new MagickImage(File.ReadAllBytes(fileToConvert)))
 				{
+					Console.WriteLine("Writing file: " + exportFilePath);
 					image.Write(exportFilePath);
-					Console.WriteLine("Ok");
+					Console.Write("... Done.");
 				}
 
 				if (deleteOriginalFile && File.Exists(exportFilePath))
