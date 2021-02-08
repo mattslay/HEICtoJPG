@@ -14,12 +14,12 @@ namespace HEICtoJPG
 		//public static string imageType;
 		static void Main(string[] args)
 		{
-			int fileLeft = 0;
-			string sourcePath = "", targetPath = "";
+			string sourcePath = "";
+			string targetPath = "";
 			string[] filesInFolder;
-			bool deleteFlag = false;
 			string sourceType = ".heic";
 			string outputType = ".jpg";
+			bool deleteFlag = false;
 
 			sourcePath = Directory.GetCurrentDirectory();
 			targetPath = sourcePath;
@@ -30,10 +30,10 @@ namespace HEICtoJPG
 					sourcePath = GetPath(args[x]);
 				if (args[x].ToLower().Contains("/target"))
 					targetPath = GetPath(args[x]);
-				if (args[x].ToLower() == "/delete")
-					deleteFlag = true;
 				if (args[x].ToLower() == "/png")
 					outputType = ".png";
+				if (args[x].ToLower() == "/delete")
+					deleteFlag = true;
 			}
 
 			filesInFolder = Directory.GetFiles(sourcePath, "*" + sourceType);
