@@ -33,20 +33,20 @@ If you don't want to specify the source and target dir, you can just use this fo
     HeicConvert.exe /jpg /delete
 
 ## Note 4
-Once the app finds an HEIC file in the source location, it checks if their is already a converted file with the requested .jpg or .png extension, and will skip over converting this file, as there is no need to process it if it already exists.
+Once the app finds an HEIC file in the source location, it checks if there is already a converted file with the requested .jpg or .png extension, and it will skip over converting this file, as there is no need to process it if it already exists.
 
 ## Note 5
-The app displays a console message like "Processing Item XXXXXXX.HEIC" so there will be some feedback to the console while the app is processsing files.  Or a message like "Skipped file XXXXX.HEIC becuase it has already been converted." if they file has already converted before.
+The app displays a console message like "Processing Item XXXXXXX.HEIC" to give some output while the app is processsing files.  Or a message like "Skipped file XXXXX.HEIC becuase it has already been converted." if the file has already converted before.
 
 ## Note 6
-User can specify a /target flag without specifying a /source flag. In this case, all procesing is done on HEIC files found current DOS directory and the location of the converted files will be as the user specified in the /target flag. Example
+User can specify a /target flag without specifying a /source flag. In this case, all procesing is done on HEIC files found current DOS directory and the location of the converted files will be as the user specified in the /target flag. Do not add a trailing basckslash to the taret path.  Example
 
     HeicConvert.exe /target="D:\SomeOtherFolder\SubFolder" /jpg /delete
 
 
 # Possbile Future Updates:
- 1. We could add a "/force" flag to force a re-writing of the target file if it already exists.
- 2. Add a log output file of what processing was done (i.e. note the date and time, /source and /target locations, and each specific file that was converter. Note if /delete flag was used.
+ 1. Add a "/force" flag to force a re-writing of the target file(s) if the already exist.
+ 2. Add output to a log file of what processing was done (i.e. note the date and time, /source and /target locations, and each specific file that was converter, and add note if /delete flag was used.
  3. Allow input types other than HEIC as the initial file type to convert.
  
 
