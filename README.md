@@ -23,7 +23,7 @@ And, you can use the command line switch to *delete* the original HEIC once conv
 No spaces are allowed in the /source=".." and /target="..." pattern (except within the quote marks)
 
 ## Note 2
-Do not add a trailing backslash at the end of the paths. I.e. Use "C:\Blah", not "C:\Blah\"
+Do not add a trailing backslash at the end of the paths. I.e. Use "C:\Blah", not "C:\Blah\\"
 
 ## Note 3
 If you don't want to specify the source and target dir, you can just use this format, and it will process all the HEIC files in the current DOS directory:
